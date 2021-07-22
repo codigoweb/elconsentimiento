@@ -37,7 +37,7 @@ class ElconsentimientoStatusEvent extends Event {
     $this->uuid = $uuid;
     $this->status = $status;
     $this->signer_id = $signer_id;
-    if (\Drupal::config('.elconsentimiento.settings')->get('debug_mode') == 1) {
+    if (\Drupal::config('elconsentimiento.settings')->get('debug_mode') == 1) {
       \Drupal::logger('ElconsentimientoStatusEvent')
         ->info('Construct. UUID: @uuid, status: @status', ['@uuid' => $uuid, '@status' => $status]);
     }

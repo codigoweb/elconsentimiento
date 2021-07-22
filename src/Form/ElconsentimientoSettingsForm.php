@@ -63,7 +63,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
-    $config = $this->config('.elconsentimiento.settings');
+    $config = $this->config('elconsentimiento.settings');
 
     $method_options = ['GET' => 'GET', 'POST' => 'POST'];
 
@@ -250,7 +250,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $config = $this->config('.elconsentimiento.settings');
+    $config = $this->config('elconsentimiento.settings');
     $config->delete();
 
     $config->set('url', $form_state->getValue('url'))

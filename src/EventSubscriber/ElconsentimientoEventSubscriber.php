@@ -28,7 +28,7 @@ class ElconsentimientoEventSubscriber implements EventSubscriberInterface {
     $status = $event->getStatus();
     $signerID = $event->getSignerId();
 
-    if (\Drupal::config('.elconsentimiento.settings')->get('debug_mode') == 1) {
+    if (\Drupal::config('elconsentimiento.settings')->get('debug_mode') == 1) {
       \Drupal::logger('ElconsentimientoEventSubscriber')
         ->info('onStatusChange. UUID: @uuid, status: @status', ['@uuid' => $uuid, '@status' => $status]);
     }

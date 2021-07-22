@@ -22,7 +22,7 @@ class ElconsentimientoService {
    *
    */
   public function __construct() {
-    $this->config =  Drupal::config('.elconsentimiento.settings');
+    $this->config =  Drupal::config('elconsentimiento.settings');
   }
 
   /**
