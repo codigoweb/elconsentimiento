@@ -47,7 +47,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      '.elconsentimiento.settings',
+      'elconsentimiento.settings',
     ];
   }
 
