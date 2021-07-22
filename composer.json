@@ -1,0 +1,15 @@
+{
+  "name": "navandu/elconsentimiento",
+  "description": "Provides connection with elconsentimiento.es API",
+  "type": "drupal-custom-module",
+  "minimum-stability": "dev",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Javier Gomez",
+      "email": "javier.gomez@navandu.com"
+    }
+  ],
+  "require": {},
+  "extra": {}
+}

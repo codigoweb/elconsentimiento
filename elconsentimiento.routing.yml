@@ -1,0 +1,59 @@
+elconsentimiento.settings:
+  path: 'admin/config/services/elconsentimiento'
+  defaults:
+    _form: '\Drupal\elconsentimiento\Form\ElconsentimientoSettingsForm'
+    _title: 'Elconsentimiento.es Settings'
+  requirements:
+    _permission: 'administer elconsentimiento'
+  options:
+    _admin_route: TRUE
+
+elconsentimiento.get_user:
+  path: '/external-api/elconsentimiento/get-user'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findUser'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_devices:
+  path: '/external-api/elconsentimiento/get-devices'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findDevices'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_documents:
+  path: '/external-api/elconsentimiento/get-documents'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findDocuments'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_document:
+  path: '/external-api/elconsentimiento/get-document/{uuid}'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findDocument'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_templates:
+  path: '/external-api/elconsentimiento/get-templates'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findTemplates'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_template:
+  path: '/external-api/elconsentimiento/get-template/{uuid}'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findTemplate'
+  requirements:
+    _permission: 'access administration pages'
+
+elconsentimiento.get_templates_variables:
+  path: '/external-api/elconsentimiento/get-template-variables/{uuid}'
+  defaults:
+    _controller: '\Drupal\elconsentimiento\Controller\ElconsentimientoController::findTemplateVariables'
+  requirements:
+    _permission: 'access administration pages'
+

@@ -1,0 +1,5 @@
+elconsentimiento.settings:
+  title: Elconsentimiento.es
+  route_name: elconsentimiento.settings
+  base_route: elconsentimiento.settings
+  description: 'Configure Elconsentimiento.es'

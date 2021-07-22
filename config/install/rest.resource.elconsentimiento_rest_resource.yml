@@ -1,0 +1,9 @@
+id: elconsentimiento_rest_resource
+plugin_id: elconsentimiento_rest_resource
+granularity: method
+configuration:
+  POST:
+    supported_formats:
+      - json
+    supported_auth:
+      - basic_auth

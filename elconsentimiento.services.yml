@@ -1,0 +1,8 @@
+services:
+  elconsentimiento.manager:
+    class: Drupal\elconsentimiento\ElconsentimientoService
+
+  elconsentimiento.event_subscriber:
+    class: Drupal\elconsentimiento\EventSubscriber\ElconsentimientoEventSubscriber
+    tags:
+      - {name: event_subscriber}

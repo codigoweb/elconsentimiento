@@ -1,0 +1,6 @@
+name: 'elconsentimiento.es'
+type: module
+description: 'Provides connection with "elconsentimiento.es".'
+package: 'Navandu'
+core_version_requirement: ^8 || ^9
+version: '1.0.0'

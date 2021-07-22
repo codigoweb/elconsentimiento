@@ -1,0 +1,16 @@
+url: 'https://azureapis-pre.elconsentimiento.es'
+admin_user: navandu
+admin_pwd:
+debug_mode: 1
+template_uuid: 3d4d4396-67ce-11eb-ae93-0242ac130002
+template_monitor: test_monitor
+template_center_name: 'test Center'
+login: /login
+user: /rgpd/user
+devices: /rgpd/devices
+documents: /rgpd/documents
+get_document: '/rgpd/document/{uuid}'
+post_document: /rgpd/document
+templates: /rgpd/templates
+template: '/rgpd/template/{uuid}'
+template_variables: '/rgpd/template/{uuid}/variables?'

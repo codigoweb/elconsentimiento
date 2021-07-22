@@ -1,0 +1,6 @@
+elconsentimiento.settings:
+  title: 'Elconsentimiento.es'
+  description: 'Configure Elconsentimiento.es.'
+  route_name: elconsentimiento.settings
+  parent: system.admin_config_services
+  weight: 10

@@ -1,0 +1,641 @@
+{
+	"info": {
+		"_postman_id": "e58944de-b086-4219-a401-80a188c443ab",
+		"name": "SuperDocs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// This will be executed BEFORE the request starts",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// This is executed AFTER the request is complete",
+							"",
+							"// Get the token and set it in the environment var",
+							"// so it can be used by any other request in the collection set",
+							"pm.environment.set(",
+							"    \"token\", ",
+							"    postman.getResponseHeader(\"Authorization\")",
+							");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"strictSSL": false
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"{{admin_user}}\",\n    \"password\": \"{{admin_pwd}}\"\n}"
+				},
+				"url": {
+					"raw": "{{api_url}}/login",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"username\":\"admin\",\"password\":\"Th3&c0ns3nt\"}"
+						},
+						"url": {
+							"raw": "https://consents-production.westeurope.cloudapp.azure.com/login",
+							"protocol": "https",
+							"host": [
+								"consents-production",
+								"westeurope",
+								"cloudapp",
+								"azure",
+								"com"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Server",
+							"value": "openresty/1.15.8.2"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 30 Oct 2019 08:54:36 GMT"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15724800; includeSubDomains"
+						},
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImF1dGhvcml0aWVzIjpbIlJPTEVfQURNSU4iXSwiaWF0IjoxNTcyNDI1Njc2LCJleHAiOjE1NzI1MTIwNzZ9.DnWr26lnKktjZohcdwWKjmYJpl9KcD4U2cZMFN7wGpU"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						}
+					],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "user",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/user",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "devices",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/devices",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"devices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "templates",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/templates",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"templates"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "template/{uuid}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/template/3d4d4396-67ce-11eb-ae93-0242ac130002",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"template",
+						"3d4d4396-67ce-11eb-ae93-0242ac130002"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "template/{uuid}/variables",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/template/3d4d4396-67ce-11eb-ae93-0242ac130002/variables?",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"template",
+						"3d4d4396-67ce-11eb-ae93-0242ac130002",
+						"variables"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "documents",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/documents?order=creationDate",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"documents"
+					],
+					"query": [
+						{
+							"key": "order",
+							"value": "creationDate"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "document/{uuid}",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/document/1f979a88-ad04-4e95-8223-0bd1aa8d14df",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"document",
+						"1f979a88-ad04-4e95-8223-0bd1aa8d14df"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "document",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"templateUuid\": \"45882039-84fd-4e27-b395-eeb017ee82f9\",\n    \"documentType\": 2,\n    \"folder\": \"navanduprueba\",\n    \"variables\": [\n        {\n            \"uuid\": \"269bbec3-4476-4a24-9178-00e25113c77a\"\n        },\n        {\n            \"uuid\": \"a4e1e13a-9751-4fee-8736-ed11c0450acc\"\n        },\n        {\n            \"uuid\": \"19adf378-0cbf-4bd0-b0ef-0b92f210caa2\",\n            \"value\": \"congreso\"\n        },\n        {\n            \"uuid\": \"33ada317-b702-4791-9f4f-fe90410f9095\",\n            \"value\": \"breixoam@gmail.com\"\n        },\n        {\n            \"uuid\": \"1c5a069f-415b-44d5-b754-2e3bf4d23646\",\n            \"value\": \"Calle de los Reyes Magos 12 28009 Madrid\"\n        },\n        {\n            \"uuid\": \"a9433bf2-3efa-4b91-8181-0d6f690a168b\",\n            \"value\": \"https://www.google.es\"\n        },\n        {\n            \"uuid\": \"4b76098a-86c2-4728-889b-5b0f8aea8d42\",\n            \"value\": \"D82310699\"\n        },\n        {\n            \"uuid\": \"e7fe6b5d-0248-4a55-9835-bc8538f7cd02\",\n            \"value\": \"918888888\"\n        },\n        {\n            \"uuid\": \"b1fff2f4-9ac9-4bf1-b84a-bddc6c457185\"\n        },\n        {\n            \"uuid\": \"24734d8c-5bcc-4a5c-9c97-0eb6c45cb2de\",\n            \"value\": \"Breixo Alvarez\"\n        },\n        {\n            \"uuid\": \"85e1a202-4c6d-4e18-91f8-2b453358c115\",\n            \"value\": \"10281434C\"\n        },\n\n        {\n            \"uuid\": \"3b939152-0390-44d4-bf2a-9b2368e9acae\",\n            \"value\": \"Nombre RL 1\"\n        },\n        {\n            \"uuid\": \"c50f2da5-a622-41ad-851d-f0a33e6652c1\",\n            \"value\": \"NIF RL 1\"\n        },\n        {\n            \"uuid\": \"d919816c-c275-4468-b83d-921bff9d5123\",\n            \"value\": \"Nombre RL 2\"\n        },\n        {\n            \"uuid\": \"f632602b-70d1-449f-a2b3-6e7879448feb\",\n            \"value\": \"NIF RL 2\"\n        },\n        {\n            \"uuid\": \"ff8fad98-8aa5-49be-8fc5-87cfd352720c\",\n            \"value\": \"1 Representante Legal\"\n        },\n        {\n            \"uuid\": \"d7127b61-f559-4b61-b91a-09969ff0f599\",\n            \"value\": \"2 Representante Legal\"\n        },\n        {\n            \"uuid\": \"0a6f4f14-d624-11ea-87d0-0242ac130003\",\n            \"value\": \"\"\n        }\n    ],\n    \"signers\": [\n        {\n            \"idn\": \"12312312\",\n            \"typeOfIdn\": \"NIF\",\n            \"name\": \"Camilo\",\n            \"lastName\": \"Ramirez\",\n            \"device\": \"D82310699-1668-VIDM0004\",\n            \"email\": \"cailoramirez@gmail.com\",\n            \"phone\": \"+34666666666\",\n            \"newSigner\": false\n        }\n    ],\n    \"notificationURL\": \"google.es\",\n    \"fileName\": \"nombrearchivo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/document",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "document Navandu",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"folder\": \"NavanduPrueba\",\n    \"templateUuid\": \"3d4d4396-67ce-11eb-ae93-0242ac130002\",\n    \"documentType\": 3,\n    \"variables\": [\n        {\n            \"uuid\": \"e469799a-2057-4f02-b2ed-0f9e117a5d30\",\n            \"name\": \"nif\",\n            \"type\": \"string\",\n            \"anchor\": \"%signer_nif%\",\n            \"value\": \"nifFirmante\"\n        },\n        {\n            \"uuid\": \"4c719b74-0627-443f-a314-d869ea64c132\",\n            \"name\": \"nombre_firmante\",\n            \"type\": \"string\",\n            \"anchor\": \"%signer_name%\",\n            \"value\": \"nombre firmante\"\n        },\n        {\n            \"uuid\":\"6fa8a0e1-061f-4782-8ae8-2a5e53259507\",\n            \"name\":\"center_name\",\n            \"type\":\"string\",\n            \"anchor\":\"%center_name%\",\n            \"value\":\"CENTRO\"\n        },\n        {\n            \"uuid\": \"e696c21e-fb95-47d6-9bf8-2935b1e43800\",\n            \"name\": \"cif\",\n            \"type\": \"string\",\n            \"anchor\": \"%cif%\"\n        },\n        {\n            \"uuid\": \"d762e783-7ade-41fb-b862-f63d0eb409a8\",\n            \"name\": \"direction\",\n            \"type\": \"string\",\n            \"anchor\": \"%direction%\"\n        },\n        {\n            \"uuid\": \"6be2302b-4c47-4acc-b9f0-43b131f38a8a\",\n            \"name\": \"email\",\n            \"type\": \"string\",\n            \"anchor\": \"%email%\"\n        },\n        {\n            \"uuid\": \"219667b5-646c-42ab-a4c7-f4173d7db793\",\n            \"name\": \"monitor\",\n            \"type\": \"string\",\n            \"anchor\": \"%monitor%\",\n            \"value\": \"MONITOR\"\n        },\n        {\n            \"uuid\": \"bff6166c-82fd-4cd9-b09f-aec547de1641\",\n            \"name\": \"document_date\",\n            \"type\": \"string\",\n            \"anchor\": \"%document_date%\",\n            \"value\": \"22-01-2021\"\n        },\n        {\n            \"uuid\": \"a3c7ebac-f66e-4748-945a-02e12c5fac72\",\n            \"name\": \"url_rgpd\",\n            \"type\": \"string\",\n            \"anchor\": \"%url_rgpd%\",\n            \"value\": \"www.navandu.es/rgpd\"\n        }\n    ],\n    \"signers\": [\n        {\n            \"idn\": \"12312312B\",\n            \"typeOfIdn\": \"NIF\",\n            \"name\": \"Firmante\",\n            \"lastName\": \"Uno\",\n            \"device\": \"D82310699-1668-VIDM0004\",\n            \"email\": \"javier.gomez+4@navandu.com\",\n            \"phone\": \"+34630028510\",\n            \"newSigner\": true\n        }\n    ],\n    \"notificationURL\": \"www.navandu.es\",\n    \"fileName\": \"rgpd\"\n    }\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api_url}}/rgpd/document",
+					"host": [
+						"{{api_url}}"
+					],
+					"path": [
+						"rgpd",
+						"document"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "callback",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"uuid\": \"521\",\n  \"signerId\": \"522\",\n  \"templateUuid\": \"523\",\n  \"templateName\": \"string\",\n  \"templateContent\": \"string\",\n  \"templateType\": {\n    \"id\": \"int\",\n    \"name\": \"string\",\n    \"active\": \"boolean\"\n  },\n  \"template\": {\n    \"uuid\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"content\": \"string\",\n    \"variables\":[\n      {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"anchor\": \"string\",\n        \"container\": \"string\",\n        \"requiered\": \"boolean\",\n        \"orederNumer\": \"int\",\n        \"value\": \"string\"\n      }\n    ],\n    \"active\": \"string\",\n    \"batch\": \"string\",\n    \"templateType\": {\n      \"id\": \"int\",\n      \"name\": \"string\",\n      \"active\": \"boolean\"\n    },\n    \"orderNumber\": \"int\",\n    \"hasVariables\": \"boolean\"\n  },\n  \"status\": {\n    \"id\": 2,\n    \"name\": \"signed\",\n    \"nameEs\": \"firmado\"\n  },\n  \"content\": \"string\",\n  \"pdfContent\": \"string(Base64)\",\n  \"creationDate\": \"string\",\n  \"signatureDate\": \"string\",\n  \"documentType\": \"string\",\n  \"signers\":[\n    {\n      \"uuid\": \"string\",\n      \"idn\": \"string\",\n      \"typeOfIdn\": \"string\",\n      \"name\": \"string\",\n      \"email\": \"string\",\n      \"phone\": \"string\",\n      \"device\": \"string\",\n      \"externalUrl\": \"string\"\n    }\n  ],\n  \"filename\": \"string\",\n  \"mimeType\": \"string\",\n  \"expedient\": \"string\",\n  \"rejectReason\": \"string\",\n  \"variableResponses\":[\n    {\n      \"uuid\": \"string\",\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ucb-psoriasis.docker.localhost/api/v1/elconsentimiento/callback",
+					"protocol": "http",
+					"host": [
+						"ucb-psoriasis",
+						"docker",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"elconsentimiento",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "callback login",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"uuid\": \"21\",\n    \"signerId\": \"22\",\n    \"templateUuid\": \"23\",\n    \"templateName\": \"string\",\n    \"templateContent\": \"string\",\n    \"templateType\": {\n        \"id\": \"int\",\n        \"name\": \"string\",\n        \"active\": \"boolean\"\n    },\n    \"template\": {\n        \"uuid\": \"string\",\n        \"name\": \"string\",\n        \"description\": \"string\",\n        \"content\": \"string\",\n        \"variables\":[\n            {\n                \"uuid\": \"string\",\n                \"name\": \"string\",\n                \"type\": \"string\",\n                \"anchor\": \"string\",\n                \"container\": \"string\",\n                \"requiered\": \"boolean\",\n                \"orederNumer\": \"int\",\n                \"value\": \"string\"\n            }\n        ],\n        \"active\": \"string\",\n        \"batch\": \"string\",\n        \"templateType\": {\n            \"id\": \"int\",\n            \"name\": \"string\",\n            \"active\": \"boolean\"\n        },\n        \"orderNumber\": \"int\",\n        \"hasVariables\": \"boolean\"\n    },\n    \"status\": {\n        \"id\": 2,\n        \"name\": \"signed\",\n        \"nameEs\": \"firmado\"\n    },\n    \"content\": \"string\",\n    \"pdfContent\": \"string(Base64)\",\n    \"creationDate\": \"string\",\n    \"signatureDate\": \"string\",\n    \"documentType\": \"string\",\n    \"signers\":[\n        {\n            \"uuid\": \"string\",\n            \"idn\": \"string\",\n            \"typeOfIdn\": \"string\",\n            \"name\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\",\n            \"device\": \"string\",\n            \"externalUrl\": \"string\",\n        }\n    ],\n    \"filename\": \"string\",\n    \"mimeType\": \"string\",\n    \"expedient\": \"string\",\n    \"rejectReason\": \"string\",\n    \"variableResponses\":[\n        {\n            \"uuid\": \"string\",\n            \"name\": \"string\",\n            \"value\": \"string\"\n        }\n    ]\n \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://ucb-psoriasis.docker.localhost/user/login",
+					"protocol": "http",
+					"host": [
+						"ucb-psoriasis",
+						"docker",
+						"localhost"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Callback test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"strictSSL": false
+			},
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "test",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "test",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://ucb-psoriasis.docker.localhost/api/v1/elconsentimiento/callback",
+					"protocol": "http",
+					"host": [
+						"ucb-psoriasis",
+						"docker",
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"elconsentimiento",
+						"callback"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
