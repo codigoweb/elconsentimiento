@@ -3,6 +3,7 @@
 namespace Drupal\elconsentimiento;
 
 use Drupal;
+use Drupal\Component\Serialization\Json;
 use Drupal\elconsentimiento\Event\ElconsentimientoEvents;
 use Drupal\elconsentimiento\Event\ElconsentimientoStatusEvent;
 use GuzzleHttp\Exception\RequestException;
@@ -157,9 +158,14 @@ class ElconsentimientoService {
    *   The service response.
    */
   public function getDocument($uuid) {
+    $result = '';
     $paht = str_replace('{uuid}', $uuid, $this->config->get('get_document'));
     $url = $this->config->get('url'). $paht;
-    return json_decode($this->get($url));
+    $data = $this->get($url);
+    if (!empty($data)) {
+      $result = Json::decode($data);
+    }
+    return $result;
   }
 
   /**
@@ -179,7 +185,7 @@ class ElconsentimientoService {
     $url = $this->config->get('url'). $paht;
     $data = $this->get($url);
     if (!empty($data)) {
-      $decoded_data = json_decode($data);
+      $decoded_data = Json::decode((string) $data);
       return $decoded_data->status;
     }
   }
@@ -206,10 +212,10 @@ class ElconsentimientoService {
     $args = ['debug' => FALSE, 'verify' => TRUE, 'body' => $body, 'headers' => $headers];
     $response = $this->request('POST', $url, $args);
 
-    $data = $response->getBody();
+    $data = $response->getBody()->getContents();
     if (!empty($data)) {
-      $decoded_data = json_decode($data->getContents());
-      $uuid = $decoded_data->uuid;
+      $decoded_data = Json::decode((string) $data);
+        $uuid = $decoded_data['uuid'];
       return $uuid;
     }
   }
@@ -232,9 +238,14 @@ class ElconsentimientoService {
    *   The service response.
    */
   public function getTemplate($uuid) {
+    $result = '';
     $paht = str_replace('{uuid}', $uuid, $this->config->get('template'));
     $url = $this->config->get('url'). $paht;
-    return json_decode($this->get($url));
+    $data = $this->get($url);
+    if (!empty($data)) {
+      $result = Json::decode($data);
+    }
+    return $result;
   }
 
   /**
@@ -244,9 +255,14 @@ class ElconsentimientoService {
    *   The service response.
    */
   public function getTemplateVariables($uuid) {
+    $result = '';
     $paht = str_replace('{uuid}', $uuid, $this->config->get('template_variables'));
     $url = $this->config->get('url'). $paht;
-    return json_decode($this->get($url));
+    $data = $this->get($url);
+    if (!empty($data)) {
+      $result = Json::decode($data);
+    }
+    return $result;
   }
 
   /**
