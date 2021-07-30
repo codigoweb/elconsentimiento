@@ -75,7 +75,7 @@ class ElconsentimientoService {
     $headers = [
       'Accept' => 'application/json',
     ];
-    $body = json_encode($credentials, JSON_PRETTY_PRINT);
+    $body = Json::encode($credentials, JSON_PRETTY_PRINT);
     $args = ['verify' => TRUE, 'body' => $body, 'headers' => $headers];
     $response = $this->request('POST', $url, $args);
     $data = $response->getHeader('Authorization');
@@ -186,7 +186,7 @@ class ElconsentimientoService {
     $data = $this->get($url);
     if (!empty($data)) {
       $decoded_data = Json::decode((string) $data);
-      return $decoded_data->status;
+      return $decoded_data['status'];
     }
   }
 
@@ -206,8 +206,6 @@ class ElconsentimientoService {
       'Accept-Encoding' => 'deflate, gzip, br',
       'Authorization' => $token
     ];
-
-//    $body = json_encode($body, JSON_PRETTY_PRINT);
 
     $args = ['debug' => FALSE, 'verify' => TRUE, 'body' => $body, 'headers' => $headers];
     $response = $this->request('POST', $url, $args);
@@ -280,13 +278,13 @@ class ElconsentimientoService {
       $statusId = $payload['status']['id'];
       if (!empty($statusId)) {
         if ($this->config->get('debug_mode') == 1) {
-          \Drupal::logger('ElconsentimientoService')
+          Drupal::logger('ElconsentimientoService')
             ->info('statusCallback. UUID: @uuid, status: @status', ['@uuid' => $uuid, '@status' => $statusId]);
         }
         // Allow other modules to do something when document status was changed.
         $event = new ElconsentimientoStatusEvent($uuid, $statusId, $signerId);
         /** @var \Symfony\Component\EventDispatcher\EventDispatcherInterface $event_dispatcher */
-        $event_dispatcher = \Drupal::service('event_dispatcher');
+        $event_dispatcher = Drupal::service('event_dispatcher');
         $event_dispatcher->dispatch(ElconsentimientoEvents::ELCONSENTIMIENTO_STATUS_CHANGED, $event);
       }
     }
@@ -312,8 +310,8 @@ class ElconsentimientoService {
     // Some variables must be replaced values
     if (!empty($vars)) {
       foreach ($variables as &$variable) {
-        if (!empty($value = $vars[$variable->name])) {
-          $variable->value = $value;
+        if (!empty($value = $vars[$variable['name']])) {
+          $variable['value'] = $value;
         }
       }
     }
@@ -324,7 +322,7 @@ class ElconsentimientoService {
     $result['signers'][] = $signer;
     $result['notificationURL'] = $this->config->get('notificationURL');
     $result['fileName'] = $this->config->get('fileName');
-    return json_encode($result);
+    return Json::encode($result);
 
   }
 

@@ -7,6 +7,7 @@ use Drupal;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Component\Serialization\Json;
 use stdClass;
 
 class ElconsentimientoSettingsForm extends ConfigFormBase {
@@ -114,7 +115,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
 
     $form['general']['document_type'] = [
       '#type' => 'select',
-      '#title' => t('Signature Type'),
+      '#title' => $this->t('Signature Type'),
       '#options' => [
         3 => 'Remote',
       ],
@@ -151,13 +152,13 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
     ];
 
     $form['paths'] = [
-      '#title' => t('Paths'),
+      '#title' => $this->t('Paths'),
       '#type' => 'fieldset',
     ];
     foreach ($this->formElements as $element => $title) {
       $form['paths'][$element] = [
         '#type' => 'textfield',
-        '#title' => t($title),
+        '#title' => $this->t($title),
         '#required' => TRUE,
         '#default_value' => $config->get($element),
       ];
@@ -203,9 +204,8 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
       $signer['lastName'] = "Test";
       $variables['monitor'] = "MONITOR";
       $variables['center_name'] = "CENTER_NAME";
-//      $signer['device'] = 'D82310699-1668-VIDM0004';
       $signer['email'] = 'javier.gomez+25@navandu.com';
-      $signer['phone'] = '+34630028510';
+      $signer['phone'] = '+34630020000';
       $signer['newSigner'] = false;
       $template = $this->service->buildPost($uuid, $signer, $variables);
     }
@@ -213,7 +213,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
     $form['test']['test_post_document'] = [
       '#type' => 'textarea',
       '#title' => $this->t('POST document Body TEST'),
-      '#description' => t('Enter a body to test.'),
+      '#description' => $this->t('Enter a body to test.'),
       '#required' => FALSE,
       '#default_value' => !empty($template) ? $template : '',
     ];
@@ -221,7 +221,7 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
     $form['test']['test_uuid'] = [
       '#type' => 'textfield',
       '#title' => $this->t('UUID'),
-      '#description' => t('UUID to test.'),
+      '#description' => $this->t('UUID to test.'),
       '#required' => FALSE,
     ];
 
@@ -287,9 +287,9 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
   public function submitTestDocumentStatus(array &$form, FormStateInterface $form_state) {
     $uuid = $form_state->getValue('test_uuid');
     $status = $this->service->getDocumentStatus($uuid);
-    if ($status instanceof stdClass) {
-      $status_id = $status->id;
-      $status_name = $status->name;
+    if (!empty($status) && is_array($status)) {
+      $status_id = $status['id'];
+      $status_name = $status['name'];
       Drupal::messenger()
         ->addMessage(t('<p>UUID: <em>@uuid</em></p><p>Status: <em>@status_id</em> <em>@status_name</em></p>', [
           '@status_id' => $status_id,
@@ -309,12 +309,11 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
   public function submitTestTemplate(array &$form, FormStateInterface $form_state) {
     $uuid = $form_state->getValue('test_uuid');
     $template = $this->service->getTemplate($uuid);
-    if ($template instanceof stdClass) {
-      $a = (array) $template;
+    if (!empty($template) && is_array($template)) {
       Drupal::messenger()
         ->addMessage(t('UUID: <em>@uuid</em>. Template Name: <em>@name</em>', [
           '@uuid' => $uuid,
-          '@name' => $template->name,
+          '@name' => $template['name'],
         ]));
     }
     else {
@@ -327,11 +326,11 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
     $result = [];
     $templates = $this->service->getTemplates();
     if (!empty($templates)) {
-      $templates = json_decode($templates);
+      $templates = Json::decode($templates);
       foreach ($templates as $template) {
-        if ($template instanceof stdClass) {
-          $uuid = strval($template->uuid);
-          $result[$uuid] = $template->name;
+          if (!empty($template) && is_array($template)) {
+          $uuid = strval($template['uuid']);
+          $result[$uuid] = $template['name'];
         }
       }
     }
