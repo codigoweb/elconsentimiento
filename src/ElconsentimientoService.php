@@ -317,8 +317,8 @@ class ElconsentimientoService {
     // Some variables must be replaced values
     if (!empty($vars)) {
       foreach ($variables as &$variable) {
-        if (!empty($value = $vars[$variable['name']])) {
-          $variable['value'] = $value;
+        if (isset($vars[$variable['name']])) {
+          $variable['value'] = $vars[$variable['name']];
         }
       }
     }
