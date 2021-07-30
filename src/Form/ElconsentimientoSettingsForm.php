@@ -277,8 +277,9 @@ class ElconsentimientoSettingsForm extends ConfigFormBase {
    */
   public function submitTestPsotDocument(array &$form, FormStateInterface $form_state) {
     $data = $form_state->getValue('test_post_document');
-    $uuid = $this->service->postDocument($data);
-    Drupal::messenger()->addMessage('UUID: ' . $uuid);
+    $response = $this->service->postDocument($data);
+    $uuid = $response['uuid'];
+    Drupal::messenger()->addMessage('UUID: ' . $uuid . ' Status: ' . $response['status']['id'] . ' ' . $response['status']['name']);
   }
 
   /**

@@ -179,6 +179,7 @@ class ElconsentimientoService {
    * id: 2, name: signed
    * id: 3, name: rejected
    * id: 4, name: generating
+   * id: 6, name: error
    */
   public function getDocumentStatus($uuid) {
     $paht = str_replace('{uuid}', $uuid, $this->config->get('get_document'));
@@ -213,9 +214,15 @@ class ElconsentimientoService {
     $data = $response->getBody()->getContents();
     if (!empty($data)) {
       $decoded_data = Json::decode((string) $data);
+      if ($this->config->get('debug_mode') == 1) {
         $uuid = $decoded_data['uuid'];
-      return $uuid;
+        $statusId = $decoded_data['status']['id'];
+        Drupal::logger('ElconsentimientoService')
+          ->info('postDocument. UUID: @uuid, status: @status', ['@uuid' => $uuid, '@status' => $statusId]);
+      }
+      return $decoded_data;
     }
+    return [];
   }
 
   /**
